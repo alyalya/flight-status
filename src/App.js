@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Arrivals from './components/arrivals/arrivals.js';
+// import Arrivals from './components/arrivals/arrivals.js';
+import Table from './components/table/table.js';
 import './App.css';
 
 class App extends Component {
@@ -93,7 +94,7 @@ class App extends Component {
 
   render() {
     return (
-      <div><Arrivals/></div>
+      <div><Table/></div>
     )
   }
 }

@@ -117,21 +117,9 @@ class Arrivals extends React.Component {
     }
     render() {
         return (
-            <div>
-                <button className="status">Departure</button>
-                <button className="status">Arrival</button>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Time</th>
-                            <th>Airport</th> 
-                            <th>Flight</th>
-                            <th>Status</th>
-                        </tr>
-                        {this.generateLine(3)}
-                    </tbody>
-                </table>
-          </div>
+            <tbody>
+                {this.generateLine(3)}
+          </tbody>
         )
     }
 
