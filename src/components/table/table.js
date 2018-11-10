@@ -1,29 +1,18 @@
 import React from 'react';
-import Arrivals from '../arrivals/arrivals.js';
-import Departures from '../departures/departures.js';
-import Cancellations from '../cancelled/cancelled.js';
+// import Arrivals from '../arrivals/arrivals.js';
+// import Departures from '../departures/departures.js';
+// import Cancellations from '../cancelled/cancelled.js';
 
 
 class Table extends React.Component {
+
     constructor(props) {
-        super(props);
-
-        this.onClickDep = this.onClickDep.bind(this);
-        this.onClickArr = this.onClickArr.bind(this);
-        this.onClickCanc = this.onClickCanc.bind(this);        
-
-        this.state = {
-            data: <Departures/>
-        }
+        super(props);   
     }
+
     render() {
         return (
-        <div>
-        <button className="status" onClick={this.onClickDep}>Departure</button>
-        <button className="status" onClick={this.onClickArr}>Arrival</button>
-        <button className="status" onClick={this.onClickCanc}>Cancelled</button>        
-        <input/>
-        <table>
+            <table>
             <thead>
                 <tr>
                     <th>Time</th>
@@ -32,35 +21,42 @@ class Table extends React.Component {
                     <th>Status</th>
                 </tr>
             </thead>
-            {this.state.data}
+            <tbody>
+                {this.generateLine(4)}
+            </tbody>
         </table>
-        </div>
-    )}
-
-    onClickDep(event) {
-        this.setState(
-            {
-                data: <Departures/>
-            }
         )
+        
     }
 
-    onClickArr(event) {
-        this.setState(
-            {
-                data: <Arrivals/>
-            }
-        )       
-    }
+    generateLine(j) {
 
-    onClickCanc(event) {
-        this.setState(
-            {
-                data: <Cancellations/>
-            }
-        )       
-    }
+        const data = this.props.flightData;
 
+        var arr = [];
+        if (data.type === 'arrival') {
+            for (var i = 0; i < j; i++) {
+                arr.push(
+                    <tr>
+                        <td>{data[i].arrival.estimatedRunway}</td>
+                        <td>{data[i].departure.iataCode}</td>
+                        <td>{data[i].flight.number}</td>
+                        <td>{data[i].status}</td>
+                    </tr>)
+            } 
+        } else {
+            for (var k = 0; k < j; k++) {
+                arr.push(
+                    <tr status={data[k].status}>
+                        <td>{data[k].departure.scheduledTime}</td>
+                        <td>{data[k].arrival.iataCode}</td>
+                        <td>{data[k].flight.number}</td>
+                        <td>{data[k].status}</td>
+                    </tr>)
+            } 
+        }
+        return arr;
+    }
 }
 
 export default Table;
