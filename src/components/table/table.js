@@ -1,6 +1,7 @@
 import React from 'react';
 import Arrivals from '../arrivals/arrivals.js';
 import Departures from '../departures/departures.js';
+import Cancellations from '../cancelled/cancelled.js';
 
 
 class Table extends React.Component {
@@ -8,7 +9,8 @@ class Table extends React.Component {
         super(props);
 
         this.onClickDep = this.onClickDep.bind(this);
-        this.onClickArr = this.onClickArr.bind(this);        
+        this.onClickArr = this.onClickArr.bind(this);
+        this.onClickCanc = this.onClickCanc.bind(this);        
 
         this.state = {
             data: <Departures/>
@@ -19,6 +21,8 @@ class Table extends React.Component {
         <div>
         <button className="status" onClick={this.onClickDep}>Departure</button>
         <button className="status" onClick={this.onClickArr}>Arrival</button>
+        <button className="status" onClick={this.onClickCanc}>Cancelled</button>        
+        <input/>
         <table>
             <thead>
                 <tr>
@@ -46,8 +50,17 @@ class Table extends React.Component {
             {
                 data: <Arrivals/>
             }
-        )
+        )       
     }
+
+    onClickCanc(event) {
+        this.setState(
+            {
+                data: <Cancellations/>
+            }
+        )       
+    }
+
 }
 
 export default Table;

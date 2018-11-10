@@ -9,7 +9,7 @@ class Arrivals extends React.Component {
         this.state = {
             data: [{ 
                 "type": "arrival", 
-                "status": "landed", 
+                "status": "cancelled", 
                 "departure": { 
                     "iataCode": "JFK", 
                     "icaoCode": "KJFK", 
@@ -87,7 +87,7 @@ class Arrivals extends React.Component {
               },
               { 
                 "type": "arrival", 
-                "status": "landed", 
+                "status": "cancelled", 
                 "departure": { 
                     "iataCode": "ULY", 
                     "icaoCode": "KJFK", 
@@ -118,15 +118,15 @@ class Arrivals extends React.Component {
     render() {
         return (
             <tbody>
-                {this.generateLine(3)}
-          </tbody>
+                {this.generateLine(4)}
+            </tbody>
         )
     }
 
     generateLine(j) {
         var arr = [];
         for (var i = 0; i < j; i++) {
-            arr.push(<tr>
+            arr.push(<tr status={this.state.data[i].status}>
                 <td>{this.state.data[i].arrival.estimatedRunway}</td>
                 <td>{this.state.data[i].departure.iataCode}</td>
                 <td>{this.state.data[i].flight.number}</td>
@@ -134,7 +134,6 @@ class Arrivals extends React.Component {
             </tr>)
             } 
         return arr;
-        
     }
 }
 

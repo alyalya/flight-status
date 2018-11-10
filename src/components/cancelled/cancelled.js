@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Departures extends React.Component {
+class Cancellations extends React.Component {
     constructor(props) {
         super(props);
 
@@ -9,7 +9,7 @@ class Departures extends React.Component {
         this.state = {
             data: [{ 
                 "type": "departure", 
-                "status": "landed", 
+                "status": "cancelled", 
                 "departure": { 
                     "iataCode": "VKO", 
                     "icaoCode": "KJFK", 
@@ -86,4 +86,4 @@ class Departures extends React.Component {
     }
 }
 
-export default Departures;
+export default Cancellations;
