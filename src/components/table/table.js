@@ -7,15 +7,18 @@ class Table extends React.Component {
     constructor(props) {
         super(props);
 
+        this.onClickDep = this.onClickDep.bind(this);
+        this.onClickArr = this.onClickArr.bind(this);        
+
         this.state = {
-            data: ''
+            data: <Departures/>
         }
     }
     render() {
         return (
         <div>
-        <button className="status">Departure</button>
-        <button className="status">Arrival</button>
+        <button className="status" onClick={this.onClickDep}>Departure</button>
+        <button className="status" onClick={this.onClickArr}>Arrival</button>
         <table>
             <thead>
                 <tr>
@@ -25,10 +28,26 @@ class Table extends React.Component {
                     <th>Status</th>
                 </tr>
             </thead>
-            <Arrivals/>
+            {this.state.data}
         </table>
         </div>
     )}
+
+    onClickDep(event) {
+        this.setState(
+            {
+                data: <Departures/>
+            }
+        )
+    }
+
+    onClickArr(event) {
+        this.setState(
+            {
+                data: <Arrivals/>
+            }
+        )
+    }
 }
 
 export default Table;
