@@ -1,12 +1,15 @@
 .filter {
-  /* border: 1px solid red; */
   margin: auto;
-  width: 1000px;
+  width: 1050px;
+}
+
+.filter__type {
+  display: flex;
+  justify-content: space-between;
 }
 
 .filter__status {
   padding: 0;
-  display: inline-block;
   width: 300px;
   height: 40px;
   background-color: transparent;
@@ -27,13 +30,14 @@
 .filter__search {
   margin-bottom: 40px;  
   display: block;
-  width: 950px;
+  width: 1000px;
   height: 40px;
   font-size: 18px;  
   border-bottom-color: black;  
   border-top-color: transparent;
   border-left-color: transparent;
-  border-right-color: transparent;  
+  border-right-color: transparent;
+  text-align: center;
 }
 
 .filter__search:focus{

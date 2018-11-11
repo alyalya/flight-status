@@ -1,33 +1,41 @@
 import React from 'react';
-// import Arrivals from '../arrivals/arrivals.js';
-// import Departures from '../departures/departures.js';
-// import Cancellations from '../cancelled/cancelled.js';
-
+import './style.css';
 
 class Table extends React.Component {
 
     render() {
         return (
-            <table>
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Airport</th> 
-                    <th>Flight</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {this.generateLine()}
-            </tbody>
-        </table>
+            <table className="table">
+                <thead className="table__head">
+                    <tr className="table__line">
+                        <th className="table__cell table__cell_main">Date</th>                    
+                        <th className="table__cell table__cell_main">Time</th>
+                        <th className="table__cell table__cell_main">Airport</th> 
+                        <th className="table__cell table__cell_main">Flight</th>
+                        <th className="table__cell table__cell_main">Status</th>
+                    </tr>
+                </thead>
+                <tbody className="table__body">
+                    {this.generateLine()}
+                </tbody>
+            </table>
         )
-        
     }
 
     generateLine() {
 
-        const data = this.props.flightData;
+        var optionsDate = {
+            month: 'long',
+            day: 'numeric',
+          };
+
+        var optionsTime = {
+            timezone: 'UTC',
+            hour: 'numeric',
+            minute: 'numeric',
+          };
+
+        var data = this.props.flightData;
 
         if (data.length === 0) {
             return null;
@@ -38,20 +46,22 @@ class Table extends React.Component {
         data.forEach(item => {
             if (item.type === 'arrival') {
                     arr.push(
-                        <tr>
-                            <td>{item.arrival.estimatedRunway}</td>
-                            <td>{item.departure.iataCode}</td>
-                            <td>{item.flight.number}</td>
-                            <td>{item.status}</td>
+                        <tr className="table__line">
+                            <td className="table__cell">{new Date(Date.parse(item.arrival.estimatedRunway)).toLocaleString("en-US", optionsDate)}</td>                        
+                            <td className="table__cell">{new Date(Date.parse(item.arrival.estimatedRunway)).toLocaleString("en-US", optionsTime)}</td>
+                            <td className="table__cell">{item.departure.iataCode}</td>
+                            <td className="table__cell">{item.flight.number}</td>
+                            <td className="table__cell">{item.status}</td>
                         </tr>)
 
             } else if (item.type === 'departure') {
                     arr.push(
-                        <tr>
-                            <td>{item.departure.scheduledTime}</td>
-                            <td>{item.arrival.iataCode}</td>
-                            <td>{item.flight.number}</td>
-                            <td>{item.status}</td>
+                        <tr className="table__line">
+                            <td className="table__cell">{new Date(Date.parse(item.departure.scheduledTime)).toLocaleString("en-US", optionsDate)}</td>                        
+                            <td className="table__cell">{new Date(Date.parse(item.departure.scheduledTime)).toLocaleString("en-US", optionsTime)}</td>
+                            <td className="table__cell">{item.arrival.iataCode}</td>
+                            <td className="table__cell">{item.flight.number}</td>
+                            <td className="table__cell">{item.status}</td>
                         </tr>)
             }
         });

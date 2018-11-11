@@ -1,0 +1,16 @@
+.table {
+    margin: auto;
+    font-size: 18px;
+}
+
+.table__cell {
+    padding: 6px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table__cell_main {
+    width: 220px;
+    color: #9e8b63;
+    font-size: 30px;
+}

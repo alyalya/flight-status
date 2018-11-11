@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 // import Arrivals from './components/arrivals/arrivals.js';
-import Table from './components/table/table.js';
+import Table from './components/table/Table.js';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.filterType = this.filterType.bind(this);    
+    this.filterType = this.filterType.bind(this);
     this.filterFlights = this.filterFlights.bind(this);
 
     this.initial = {
@@ -887,9 +887,11 @@ class App extends Component {
     return (
       <div>
         <div className="filter">
-          <button className="filter__status" onClick={() => this.filterType('departure')}>Departure</button>
-          <button className="filter__status" onClick={() => this.filterType('arrival')}>Arrival</button>
-          <button className="filter__status" onClick={() => this.filterType('cancelled')}>Cancelled</button>
+          <div className="filter__type">
+            <button className="filter__status" onClick={() => this.filterType('departure')}>Departure</button>
+            <button className="filter__status" onClick={() => this.filterType('arrival')}>Arrival</button>
+            <button className="filter__status" onClick={() => this.filterType('cancelled')}>Cancelled</button>
+          </div>
           <input className="filter__search" placeholder="Search by flight number" onChange={this.filterFlights} />
         </div>
         <Table flightData={this.state.data} />
@@ -898,14 +900,14 @@ class App extends Component {
   }
 
   filterType(type) {
-    var arr = this.initial.data.filter(function(item) {
+    var arr = this.initial.data.filter(function (item) {
       return item.type === type || item.status === type;
     });
     this.setState({ data: arr });
   }
 
   filterFlights(event) {
-    var searchResult = this.initial.data.filter(function(item) {
+    var searchResult = this.initial.data.filter(function (item) {
       return item.flight.number.toString().toLowerCase().indexOf(event.currentTarget.value.toString().toLowerCase()) !== -1;
     })
     this.setState({ data: searchResult });
