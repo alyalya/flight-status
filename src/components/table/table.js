@@ -6,10 +6,6 @@ import React from 'react';
 
 class Table extends React.Component {
 
-    constructor(props) {
-        super(props);   
-    }
-
     render() {
         return (
             <table>
@@ -22,39 +18,44 @@ class Table extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.generateLine(4)}
+                {this.generateLine()}
             </tbody>
         </table>
         )
         
     }
 
-    generateLine(j) {
+    generateLine() {
 
         const data = this.props.flightData;
 
-        var arr = [];
-        if (data.type === 'arrival') {
-            for (var i = 0; i < j; i++) {
-                arr.push(
-                    <tr>
-                        <td>{data[i].arrival.estimatedRunway}</td>
-                        <td>{data[i].departure.iataCode}</td>
-                        <td>{data[i].flight.number}</td>
-                        <td>{data[i].status}</td>
-                    </tr>)
-            } 
-        } else {
-            for (var k = 0; k < j; k++) {
-                arr.push(
-                    <tr status={data[k].status}>
-                        <td>{data[k].departure.scheduledTime}</td>
-                        <td>{data[k].arrival.iataCode}</td>
-                        <td>{data[k].flight.number}</td>
-                        <td>{data[k].status}</td>
-                    </tr>)
-            } 
+        if (data.length === 0) {
+            return null;
         }
+
+        var arr = [];
+
+        data.forEach(item => {
+            if (item.type === 'arrival') {
+                    arr.push(
+                        <tr>
+                            <td>{item.arrival.estimatedRunway}</td>
+                            <td>{item.departure.iataCode}</td>
+                            <td>{item.flight.number}</td>
+                            <td>{item.status}</td>
+                        </tr>)
+
+            } else if (item.type === 'departure') {
+                    arr.push(
+                        <tr>
+                            <td>{item.departure.scheduledTime}</td>
+                            <td>{item.arrival.iataCode}</td>
+                            <td>{item.flight.number}</td>
+                            <td>{item.status}</td>
+                        </tr>)
+            }
+        });
+        
         return arr;
     }
 }
